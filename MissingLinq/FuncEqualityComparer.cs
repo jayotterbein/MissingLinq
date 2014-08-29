@@ -3,23 +3,31 @@ using System.Collections.Generic;
 
 namespace MissingLinq
 {
-    public class FuncEqualityComparer<T> : IEqualityComparer<T>
+    public static class FuncEqualityComparer
     {
-        private readonly Func<T, T, bool> _compareFunc;
-
-        public FuncEqualityComparer(Func<T, T, bool> compareFunc)
+        public static IEqualityComparer<T> Create<T>(Func<T, T, bool> func)
         {
-            _compareFunc = compareFunc;
+            return new FuncEqualityComparerType<T>(func);
         }
 
-        public bool Equals(T x, T y)
+        private class FuncEqualityComparerType<T> : IEqualityComparer<T>
         {
-            return _compareFunc(x, y);
-        }
+            private readonly Func<T, T, bool> _compareFunc;
 
-        public int GetHashCode(T obj)
-        {
-            return obj.GetHashCode();
+            public FuncEqualityComparerType(Func<T, T, bool> compareFunc)
+            {
+                _compareFunc = compareFunc;
+            }
+
+            public bool Equals(T x, T y)
+            {
+                return _compareFunc(x, y);
+            }
+
+            public int GetHashCode(T obj)
+            {
+                return obj.GetHashCode();
+            }
         }
     }
 }

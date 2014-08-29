@@ -39,19 +39,26 @@ namespace MissingLinq
         {
             if (enumerable == null)
                 throw new ArgumentNullException("enumerable");
-            return enumerable.Distinct(new FuncEqualityComparer<T>(equalityFunc));
+            return enumerable.Distinct(FuncEqualityComparer.Create(equalityFunc));
         }
 
         public static IEnumerable<T> Pipe<T>(this IEnumerable<T> enumerable, Action<T> action)
+        {
+            return Pipe(enumerable, (x, i) => action(x));
+        }
+
+        public static IEnumerable<T> Pipe<T>(this IEnumerable<T> enumerable, Action<T, int> action)
         {
             if (enumerable == null)
                 throw new ArgumentNullException("enumerable");
             if (action == null)
                 throw new ArgumentNullException("action");
+            var i = 0;
             foreach (var item in enumerable)
             {
-                action(item);
+                action(item, i);
                 yield return item;
+                i++;
             }
         }
 
