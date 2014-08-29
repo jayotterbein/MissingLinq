@@ -11,22 +11,28 @@ namespace MissingLinq
             return (enumerable == null || !enumerable.Any());
         }
 
-        public static bool None<T>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+        public static bool None<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             if (predicate == null)
                 throw new ArgumentNullException("predicate");
-            return enumerable == null || !(enumerable.Any(x => predicate(x)));
+            return enumerable == null || !enumerable.Any(predicate);
         }
 
-        public static int IndexOf<T>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+        public static int IndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             if (enumerable == null)
                 throw new ArgumentNullException("enumerable");
             if (predicate == null)
                 throw new ArgumentNullException("predicate");
 
-            var itemIndexPair = enumerable.Select((x, i) => new { Item = x, Index = i }).FirstOrDefault(pair => predicate(pair.Item));
-            return (itemIndexPair == null) ? -1 : itemIndexPair.Index;
+            var i = 0;
+            foreach (var item in enumerable)
+            {
+                if (predicate(item))
+                    return i;
+                i++;
+            }
+            return -1;
         }
 
         public static IEnumerable<T> DistinctBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> equalityFunc)

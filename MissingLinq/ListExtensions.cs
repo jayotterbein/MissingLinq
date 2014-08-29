@@ -6,7 +6,7 @@ namespace MissingLinq
 {
     public static class ListExtensions
     {
-        public static IEnumerable<T> GetAndRemove<T>(this IList<T> list, Predicate<T> predicate)
+        public static IEnumerable<T> GetAndRemove<T>(this IList<T> list, Func<T, bool> predicate)
         {
             return GetAndRemove(list, (x, i) => predicate(x));
         }
@@ -37,7 +37,7 @@ namespace MissingLinq
             }
         }
 
-        public static void RemoveAll<T>(this IList<T> list, Predicate<T> predicate)
+        public static void RemoveAll<T>(this IList<T> list, Func<T, bool> predicate)
         {
             RemoveAll(list, (x, i) => predicate(x));
         }

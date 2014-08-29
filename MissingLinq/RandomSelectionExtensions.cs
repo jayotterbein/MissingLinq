@@ -24,12 +24,12 @@ namespace MissingLinq
             return Random(enumerable, random, null, false);
         }
 
-        public static T Random<T>(this IEnumerable<T> enumerable, Random random, Predicate<T> predicate)
+        public static T Random<T>(this IEnumerable<T> enumerable, Random random, Func<T, bool> predicate)
         {
             return Random(enumerable, random, predicate, false);
         }
 
-        public static T Random<T>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+        public static T Random<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             return Random(enumerable, ThreadRandom.Value, predicate, false);
         }
@@ -44,12 +44,12 @@ namespace MissingLinq
             return Random(enumerable, random, null, true);
         }
 
-        public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, Random random, Predicate<T> predicate)
+        public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, Random random, Func<T, bool> predicate)
         {
             return Random(enumerable, random, predicate, true);
         }
         
-        public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+        public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             return Random(enumerable, ThreadRandom.Value, predicate, true);
         }
@@ -71,7 +71,7 @@ namespace MissingLinq
         private static T Random<T>(
             IEnumerable<T> enumerable,
             Random random,
-            Predicate<T> predicate,
+            Func<T, bool> predicate,
             bool useDefaultIfNotFound)
         {
             if (enumerable == null)
@@ -79,7 +79,7 @@ namespace MissingLinq
             if (random == null)
                 throw new ArgumentNullException("random");
 
-            var sequence = (predicate == null) ? enumerable : enumerable.Where(x => predicate(x));
+            var sequence = (predicate == null) ? enumerable : enumerable.Where(predicate);
             var current = default(T);
             var count = 0;
             foreach (var item in sequence)

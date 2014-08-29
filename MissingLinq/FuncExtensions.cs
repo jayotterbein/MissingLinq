@@ -4,9 +4,9 @@ namespace MissingLinq
 {
     public static class FuncExtensions
     {
-        public static Predicate<T> ToPredicate<T>(this Func<T, bool> predicateFunc)
+        public static Func<T, bool> ToFunc<T>(this Predicate<T> predicate)
         {
-            return x => predicateFunc(x);
+            return x => predicate(x);
         }
     }
 }
