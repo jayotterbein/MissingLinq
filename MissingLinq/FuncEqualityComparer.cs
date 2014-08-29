@@ -26,7 +26,7 @@ namespace MissingLinq
 
             public int GetHashCode(T obj)
             {
-                return obj.GetHashCode();
+                return 0;
             }
         }
     }

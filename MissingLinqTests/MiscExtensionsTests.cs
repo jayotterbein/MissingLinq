@@ -31,5 +31,19 @@ namespace MissingLinqTests
             Assert.That(new[] { 0, 1, 15, 500, -1, 11, 3}.IndexOf(x => x < 0), Is.EqualTo(4));
             Assert.That(new[] {0, 1, 15, 500, -1, 11, 3}.IndexOf(x => x < -100), Is.EqualTo(-1));
         }
+
+        [Test]
+        public void DistincyByTest()
+        {
+            var items = new[]
+            {
+                new {Key = 1, Value = "1"},
+                new {Key = 2, Value = "2"},
+                new {Key = 1, Value = "not distinct"}
+            };
+
+            var distinctItems = items.DistinctBy((x, y) => x.Key == y.Key).ToArray();
+            Assert.That(distinctItems, Is.EquivalentTo(items.Take(2)));
+        }
     }
 }
