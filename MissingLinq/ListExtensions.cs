@@ -56,5 +56,29 @@ namespace MissingLinq
                 }
             }
         }
+
+        public static T GetValueOrDefault<T>(this IList<T> list, int index)
+        {
+            return GetValueOrDefault(list, index, default(T));
+        }
+
+        public static T GetValueOrDefault<T>(this IList<T> list, int index, T defaultValue)
+        {
+            if (list == null || index < 0 || index >= list.Count)
+                return defaultValue;
+            return list[index];            
+        }
+
+        public static T GetValueOrDefault<T>(this IList<T> list, int index, Func<T> defaultLazy)
+        {
+            return GetValueOrDefault(list, index, new Lazy<T>(defaultLazy));
+        }
+
+        public static T GetValueOrDefault<T>(this IList<T> list, int index, Lazy<T> defaultLazy)
+        {
+            if (list == null || index < 0 || index >= list.Count)
+                return defaultLazy.Value;
+            return list[index];
+        }
     }
 }
