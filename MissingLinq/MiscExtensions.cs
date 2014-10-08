@@ -14,22 +14,30 @@ namespace MissingLinq
         public static bool None<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
             return enumerable == null || !enumerable.Any(predicate);
         }
 
         public static int IndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             var i = 0;
             foreach (var item in enumerable)
             {
                 if (predicate(item))
+                {
                     return i;
+                }
                 i++;
             }
             return -1;
@@ -38,7 +46,9 @@ namespace MissingLinq
         public static IEnumerable<T> DistinctBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> equalityFunc)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             return enumerable.Distinct(FuncEqualityComparer.Create(equalityFunc));
         }
 
@@ -50,9 +60,13 @@ namespace MissingLinq
         public static IEnumerable<T> Pipe<T>(this IEnumerable<T> enumerable, Action<T, int> action)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             if (action == null)
+            {
                 throw new ArgumentNullException("action");
+            }
             var i = 0;
             foreach (var item in enumerable)
             {
@@ -65,9 +79,13 @@ namespace MissingLinq
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             if (action == null)
+            {
                 throw new ArgumentNullException("action");
+            }
             foreach (var item in enumerable)
             {
                 action(item);

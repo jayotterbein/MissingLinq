@@ -28,10 +28,10 @@ namespace MissingLinqTests
         [Test]
         public void GetAndRemove_removes_multiple_items_with_index()
         {
-            var list = new List<int> { 1, 5, 15, 5, 10, 3 };
+            var list = new List<int> {1, 5, 15, 5, 10, 3};
             var removedItems = list.GetAndRemove((x, i) => x >= 5 && i <= 2);
-            Assert.That(removedItems, Is.EquivalentTo(new[] { 5, 15 }));
-            Assert.That(list, Is.EquivalentTo(new[] { 1, 5, 10, 3 }));
+            Assert.That(removedItems, Is.EquivalentTo(new[] {5, 15}));
+            Assert.That(list, Is.EquivalentTo(new[] {1, 5, 10, 3}));
         }
 
         [Test]
@@ -45,9 +45,9 @@ namespace MissingLinqTests
         [Test]
         public void RemoveAll_with_index()
         {
-            IList<int> list = new List<int> { 16, 13, 77, 0 };
+            IList<int> list = new List<int> {16, 13, 77, 0};
             list.RemoveAll((x, i) => x > 1 && i == 0);
-            Assert.That(list, Is.EquivalentTo(new[] { 13, 77, 0 }));
+            Assert.That(list, Is.EquivalentTo(new[] {13, 77, 0}));
         }
     }
 }

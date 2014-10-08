@@ -12,9 +12,13 @@ namespace MissingLinq
             IComparer<TKey> comparer)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
             var result = new SortedDictionary<TKey, TElement>(comparer);
             foreach (var item in enumerable)
             {

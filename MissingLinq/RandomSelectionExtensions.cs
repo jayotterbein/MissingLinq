@@ -48,7 +48,7 @@ namespace MissingLinq
         {
             return Random(enumerable, random, predicate, true);
         }
-        
+
         public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
         {
             return Random(enumerable, ThreadRandom.Value, predicate, true);
@@ -57,7 +57,9 @@ namespace MissingLinq
         public static IList<T> Shuffle<T>(this IEnumerable<T> enumerable)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             var list = enumerable.ToList();
             list.Sort((x, y) => ThreadRandom.Value.Next());
             return list;
@@ -75,9 +77,13 @@ namespace MissingLinq
             bool useDefaultIfNotFound)
         {
             if (enumerable == null)
+            {
                 throw new ArgumentNullException("enumerable");
+            }
             if (random == null)
+            {
                 throw new ArgumentNullException("random");
+            }
 
             var sequence = (predicate == null) ? enumerable : enumerable.Where(predicate);
             var current = default(T);
@@ -86,10 +92,14 @@ namespace MissingLinq
             {
                 count++;
                 if (random.Next(count) == 0)
+                {
                     current = item;
+                }
             }
             if (count == 0 && !useDefaultIfNotFound)
+            {
                 throw new ArgumentException("Cannot obtain random element from empty sequence.", "enumerable");
+            }
             return current;
         }
     }

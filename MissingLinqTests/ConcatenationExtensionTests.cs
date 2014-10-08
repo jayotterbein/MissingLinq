@@ -26,8 +26,8 @@ namespace MissingLinqTests
         public void Append_single()
         {
             Assert.That(
-                new[] { -15, 8, 10, -15 }.Append(-15),
-                Is.EquivalentTo(new[] { -15, 8, 10, -15, -15 }));
+                new[] {-15, 8, 10, -15}.Append(-15),
+                Is.EquivalentTo(new[] {-15, 8, 10, -15, -15}));
         }
 
         [Test]

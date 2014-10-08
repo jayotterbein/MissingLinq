@@ -31,7 +31,7 @@ namespace MissingLinqTests
         {
             public int Compare(int x, int y)
             {
-                return (x * 2).CompareTo(y);
+                return (x*2).CompareTo(y);
             }
         }
     }

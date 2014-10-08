@@ -5,8 +5,8 @@ using System.Linq;
 namespace MissingLinq
 {
     /// <summary>
-    /// This class will compare using a list of comparers; once a comparer returns non-zero it will use that as the result.
-    /// If all comparers return 0, the result is 0.
+    ///     This class will compare using a list of comparers; once a comparer returns non-zero it will use that as the result.
+    ///     If all comparers return 0, the result is 0.
     /// </summary>
     public class ChainedComparer<T> : IComparer<T>, IEnumerable<IComparer<T>>
     {
@@ -26,7 +26,7 @@ namespace MissingLinq
 
         public IEnumerator<IComparer<T>> GetEnumerator()
         {
-            return ((IEnumerable<IComparer<T>>)_comparers).GetEnumerator();
+            return ((IEnumerable<IComparer<T>>) _comparers).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
