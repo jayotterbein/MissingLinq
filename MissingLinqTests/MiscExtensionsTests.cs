@@ -43,7 +43,7 @@ namespace MissingLinqTests
                 new {Key = 1, Value = "not distinct"}
             };
 
-            var distinctItems = items.DistinctBy((x, y) => x.Key == y.Key).ToArray();
+            var distinctItems = items.DistinctBy((x, y) => x.Key == y.Key);
             Assert.That(distinctItems, Is.EquivalentTo(items.Take(2)));
         }
     }
