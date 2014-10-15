@@ -91,5 +91,38 @@ namespace MissingLinq
                 action(item);
             }
         }
+
+        public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> enumerable, int chunkSize)
+        {
+            if (chunkSize <= 0)
+            {
+                throw new ArgumentOutOfRangeException("chunkSize", chunkSize, "Can't chunk enumerable into lists of size <= 0.");
+            }
+            if (enumerable == null)
+            {
+                yield return new T[0];
+            }
+            else
+            {
+                var array = new T[chunkSize];
+                var index = 0;
+                foreach (var item in enumerable)
+                {
+                    array[index++] = item;
+                    if (index == chunkSize)
+                    {
+                        yield return array;
+                        index = 0;
+                        array = new T[chunkSize];
+                    }
+                }
+                if (index > 0)
+                {
+                    yield return array
+                        .Take(index)
+                        .ToArray();
+                }
+            }
+        }
     }
 }
