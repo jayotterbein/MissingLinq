@@ -59,7 +59,7 @@ namespace MissingLinqTests
                 .Chunk(-10)
                 .First());
             Assert.That(ex.ParamName, Is.EqualTo("chunkSize"));
-            Assert.That(ex.ActualValue, Is.EqualTo(0));
+            Assert.That(ex.ActualValue, Is.EqualTo(-10));
         }
 
         [Test]
