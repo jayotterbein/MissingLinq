@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -46,6 +49,7 @@
     <Compile Include="ConcatenationExtensionTests.cs" />
     <Compile Include="FuncComparerTests.cs" />
     <Compile Include="FuncEqualityTests.cs" />
+    <Compile Include="LazyDisposableTests.cs" />
     <Compile Include="ListExtensionsTests.cs" />
     <Compile Include="MiscExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -45,6 +45,7 @@
     <Compile Include="ConcatenationExtensions.cs" />
     <Compile Include="FuncEqualityComparer.cs" />
     <Compile Include="FuncExtensions.cs" />
+    <Compile Include="LazyDisposable.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="MiscExtensions.cs" />
     <Compile Include="NullToEmptyExtensions.cs" />
